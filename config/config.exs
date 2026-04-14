@@ -9,6 +9,7 @@ import Config
 
 config :social,
   ecto_repos: [Social.Repo],
+  migration_primary_key: [type: :uuid],
   generators: [timestamp_type: :utc_datetime]
 
 # Configures the endpoint
