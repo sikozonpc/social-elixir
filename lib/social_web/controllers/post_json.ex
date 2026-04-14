@@ -1,5 +1,6 @@
 defmodule SocialWeb.PostAPIJSON do
   alias Social.Posts.Post
+  alias SocialWeb.CommentsJSON
 
   @doc """
   Renders a list of posts.
@@ -20,7 +21,9 @@ defmodule SocialWeb.PostAPIJSON do
       id: post.id,
       title: post.title,
       content: post.content,
-      read_count: post.read_count
+      read_count: post.read_count,
+      comments_count: post.comments_count,
+      comments: CommentsJSON.index(%{comments: post.comments})
     }
   end
 end

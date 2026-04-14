@@ -19,9 +19,10 @@ defmodule Social.Posts do
   """
   def list_posts do
     from(p in Post,
-    left_join: c in assoc(p, :comments),
-    group_by: p.id,
-    select_merge: %{comments_count: count(c.id)})
+      left_join: c in assoc(p, :comments),
+      group_by: p.id,
+      select_merge: %{comments_count: count(c.id)}
+    )
     |> Repo.all()
   end
 
@@ -41,7 +42,8 @@ defmodule Social.Posts do
   """
   def get_post!(id), do: Repo.get!(Post, id)
 
-  def get_post(id, preload \\ []), do: Repo.one(from p in Post, where: p.id == ^id, preload: ^preload)
+  def get_post(id, preload \\ []),
+    do: Repo.one(from p in Post, where: p.id == ^id, preload: ^preload)
 
   @doc """
   Creates a post.
@@ -56,7 +58,7 @@ defmodule Social.Posts do
 
   """
   def create_post(attrs) do
-    %Post{}
+    %Post{comments_count: 0}
     |> Post.changeset(attrs)
     |> Repo.insert()
   end

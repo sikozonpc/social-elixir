@@ -18,7 +18,7 @@ defmodule Social.Posts.Post do
   @doc false
   def changeset(post, attrs) do
     post
-    |> cast(attrs, [:title, :content, :read_count])
+    |> cast(attrs, [:title, :content])
     |> validate_required([:title, :content])
     |> validate_number(:read_count, greater_than_or_equal_to:
     0)

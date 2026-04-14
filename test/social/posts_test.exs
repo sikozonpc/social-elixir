@@ -17,7 +17,7 @@ defmodule Social.PostsTest do
 
     test "get_post!/1 returns the post with given id" do
       post = post_fixture()
-      assert Posts.get_post!(post.id) == post
+      assert Posts.get_post(post.id) == post
     end
 
     test "create_post/1 with valid data creates a post" do

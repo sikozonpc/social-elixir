@@ -11,12 +11,18 @@ defmodule SocialWeb.CommentsAPIController do
     render(conn, :index, comments: comments)
   end
 
-  def create(conn, %{"comments" => comments_params}) do
-    with {:ok, %Comments{} = comments} <- Posts.create_comments(comments_params) do
-      conn
+  def create(conn, %{"comments" => comments_params, "post_id" => post_id}) do
+    post = Posts.get_post!(post_id)
+
+    case Posts.create_comments(post, comments_params) do
+      {:ok, %Comments{} = comments} -> conn
       |> put_status(:created)
-      |> put_resp_header("location", ~p"/api/comments/#{comments}")
       |> render(:show, comments: comments)
+
+      {:error, changeset} ->
+        conn
+        |> put_status(:unprocessable_entity)
+        |> render(:error, changeset: changeset)
     end
   end
 

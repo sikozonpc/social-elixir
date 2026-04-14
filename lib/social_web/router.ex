@@ -28,8 +28,9 @@ defmodule SocialWeb.Router do
   scope "/api", SocialWeb do
     pipe_through :api
 
-    resources "/posts", PostAPIController, only: [:show, :create]
-    resources "/comments", CommentsAPIController, except: [:new, :edit]
+    resources "/posts", PostAPIController, only: [:index, :show, :create, :update, :delete] do
+      resources "/comments", CommentsAPIController, only: [:create, :delete]
+    end
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development

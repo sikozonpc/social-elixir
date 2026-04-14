@@ -29,7 +29,7 @@ defmodule Social.PostsFixtures do
       |> Enum.into(%{
         content: "some content"
       })
-      |> Social.Posts.create_comments()
+      |> Social.Posts.create_comments(post_fixture())
 
     comments
   end
