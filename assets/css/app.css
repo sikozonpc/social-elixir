@@ -103,3 +103,8 @@
 [data-phx-session], [data-phx-teleported-src] { display: contents }
 
 /* This file is for your main application CSS */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=JetBrains+Mono:wght@300;400;500&display=swap');
+
+.font-display { font-family: 'Playfair Display', Georgia, serif; }
+.font-code { font-family: 'JetBrains Mono', monospace; }

@@ -37,6 +37,8 @@ defmodule Social.Posts do
   """
   def get_post!(id), do: Repo.get!(Post, id)
 
+  def get_post(id), do: Repo.one(from p in Post, where: p.id == ^id)
+
   @doc """
   Creates a post.
 

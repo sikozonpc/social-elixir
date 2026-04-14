@@ -1,4 +1,4 @@
-defmodule SocialWeb.PostJSON do
+defmodule SocialWeb.PostAPIJSON do
   alias Social.Posts.Post
 
   @doc """

@@ -1,0 +1,49 @@
+<Layouts.flash_group flash={@flash} />
+<div class="min-h-screen flex flex-col bg-base-100">
+
+  <header class="border-b-4 border-base-content px-8 py-5">
+    <div class="max-w-3xl mx-auto flex items-baseline justify-between">
+      <span class="font-code text-xs tracking-[0.4em] uppercase font-medium">The Social</span>
+      <span class="font-code text-xs tracking-[0.3em] uppercase opacity-40">New Submission</span>
+    </div>
+  </header>
+
+  <main class="flex-1 flex items-center justify-center px-6 py-16">
+    <div class="w-full max-w-xl">
+
+      <div class="mb-10">
+        <div class="flex items-center gap-4 mb-6">
+          <div class="h-px flex-1 bg-base-content opacity-15"></div>
+          <span class="font-code text-[10px] tracking-[0.6em] uppercase opacity-40">Compose</span>
+          <div class="h-px flex-1 bg-base-content opacity-15"></div>
+        </div>
+        <h1 class="font-display text-7xl font-black leading-none text-base-content">
+          Publish<span class="text-primary">.</span>
+        </h1>
+        <p class="font-code mt-4 text-sm opacity-40 tracking-wide">
+          Share your thoughts with the world
+        </p>
+      </div>
+
+      <.form for={@form} action={~p"/posts"} method="post">
+        <div class="space-y-5">
+          <.input field={@form[:title]} type="text" label="Title" placeholder="What's the headline?" />
+          <.input field={@form[:content]} type="text" label="Content" placeholder="Tell the story..." />
+          <div class="pt-3">
+            <.button type="submit" class="btn btn-primary btn-lg w-full font-code tracking-[0.25em] uppercase text-xs">
+              Publish &rarr;
+            </.button>
+          </div>
+        </div>
+      </.form>
+
+    </div>
+  </main>
+
+  <footer class="border-t border-base-300 px-8 py-4">
+    <div class="max-w-3xl mx-auto">
+      <span class="font-code text-[10px] tracking-[0.3em] uppercase opacity-25">Social &middot; Est. 2025</span>
+    </div>
+  </footer>
+
+</div>

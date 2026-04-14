@@ -18,12 +18,14 @@ defmodule SocialWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+
+    resources "/posts", PostController, only: [:show, :new, :create]
   end
 
   scope "/api", SocialWeb do
     pipe_through :api
 
-    resources "/posts", PostController, except: [:new, :edit]
+    resources "/posts", PostAPIController, only: [:show, :create]
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development

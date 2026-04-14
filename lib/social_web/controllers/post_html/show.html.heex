@@ -1,0 +1,38 @@
+<Layouts.flash_group flash={@flash} />
+<div class="min-h-screen bg-base-100">
+
+  <nav class="border-b-4 border-base-content px-8 py-5">
+    <div class="max-w-3xl mx-auto flex items-center justify-between">
+      <.link navigate={~p"/"} class="font-code text-xs tracking-[0.35em] uppercase hover:text-primary transition-colors duration-150">
+        &larr; Back
+      </.link>
+      <span class="font-code text-xs tracking-[0.4em] uppercase opacity-35">The Social</span>
+    </div>
+  </nav>
+
+  <article class="max-w-2xl mx-auto px-8 py-16">
+
+    <div class="flex items-center gap-4 mb-10">
+      <div class="h-px flex-1 bg-base-content opacity-15"></div>
+      <span class="font-code text-[10px] tracking-[0.5em] uppercase opacity-40">
+        {@post.read_count} reads
+      </span>
+      <div class="h-px flex-1 bg-base-content opacity-15"></div>
+    </div>
+
+    <h1 class="font-display text-5xl font-black leading-tight text-base-content mb-8">
+      {@post.title}<span class="text-primary">.</span>
+    </h1>
+
+    <div class="flex items-center gap-1.5 mb-10">
+      <div class="w-10 h-1 bg-primary"></div>
+      <div class="w-3 h-1 bg-primary opacity-40"></div>
+    </div>
+
+    <p class="font-display text-xl leading-relaxed text-base-content opacity-75">
+      {@post.content}
+    </p>
+
+  </article>
+
+</div>
