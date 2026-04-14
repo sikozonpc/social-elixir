@@ -3,6 +3,7 @@ defmodule SocialWeb.PostController do
 
   alias Social.Posts
   alias Social.Posts.Post
+  alias Social.Posts.Comments
   import Phoenix.Component
 
   action_fallback SocialWeb.FallbackController
@@ -30,8 +31,15 @@ defmodule SocialWeb.PostController do
   end
 
   def show(conn, %{"id" => id}) do
-    case Posts.get_post(id) do
-      %Post{} = post -> render(conn, :show, post: post)
+    case Posts.get_post(id, [:comments]) do
+      %Post{} = post ->
+        changeset = Posts.change_comments(%Comments{post: post})
+
+        render(
+        conn,
+         :show,
+         post: post,
+         form: to_form(changeset))
       nil ->
         conn
         |> put_flash(:error, "Post not found.")

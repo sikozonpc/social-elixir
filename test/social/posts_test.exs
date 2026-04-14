@@ -60,4 +60,58 @@ defmodule Social.PostsTest do
       assert %Ecto.Changeset{} = Posts.change_post(post)
     end
   end
+
+  describe "comments" do
+    alias Social.Posts.Comments
+
+    import Social.PostsFixtures
+
+    @invalid_attrs %{content: nil}
+
+    test "list_comments/0 returns all comments" do
+      comments = comments_fixture()
+      assert Posts.list_comments() == [comments]
+    end
+
+    test "get_comments!/1 returns the comments with given id" do
+      comments = comments_fixture()
+      assert Posts.get_comments!(comments.id) == comments
+    end
+
+    test "create_comments/1 with valid data creates a comments" do
+      valid_attrs = %{content: "some content"}
+
+      assert {:ok, %Comments{} = comments} = Posts.create_comments(valid_attrs)
+      assert comments.content == "some content"
+    end
+
+    test "create_comments/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Posts.create_comments(@invalid_attrs)
+    end
+
+    test "update_comments/2 with valid data updates the comments" do
+      comments = comments_fixture()
+      update_attrs = %{content: "some updated content"}
+
+      assert {:ok, %Comments{} = comments} = Posts.update_comments(comments, update_attrs)
+      assert comments.content == "some updated content"
+    end
+
+    test "update_comments/2 with invalid data returns error changeset" do
+      comments = comments_fixture()
+      assert {:error, %Ecto.Changeset{}} = Posts.update_comments(comments, @invalid_attrs)
+      assert comments == Posts.get_comments!(comments.id)
+    end
+
+    test "delete_comments/1 deletes the comments" do
+      comments = comments_fixture()
+      assert {:ok, %Comments{}} = Posts.delete_comments(comments)
+      assert_raise Ecto.NoResultsError, fn -> Posts.get_comments!(comments.id) end
+    end
+
+    test "change_comments/1 returns a comments changeset" do
+      comments = comments_fixture()
+      assert %Ecto.Changeset{} = Posts.change_comments(comments)
+    end
+  end
 end

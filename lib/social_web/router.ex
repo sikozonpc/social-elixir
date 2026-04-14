@@ -19,13 +19,17 @@ defmodule SocialWeb.Router do
 
     get "/", PageController, :home
 
-    resources "/posts", PostController, only: [:show, :new, :create]
+    resources "/posts", PostController, only: [:show, :new, :create] do
+      resources "/comments", CommentsController, only: [:create]
+    end
+
   end
 
   scope "/api", SocialWeb do
     pipe_through :api
 
     resources "/posts", PostAPIController, only: [:show, :create]
+    resources "/comments", CommentsAPIController, except: [:new, :edit]
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development

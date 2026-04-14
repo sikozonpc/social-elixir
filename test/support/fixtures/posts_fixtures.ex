@@ -19,4 +19,18 @@ defmodule Social.PostsFixtures do
 
     post
   end
+
+  @doc """
+  Generate a comments.
+  """
+  def comments_fixture(attrs \\ %{}) do
+    {:ok, comments} =
+      attrs
+      |> Enum.into(%{
+        content: "some content"
+      })
+      |> Social.Posts.create_comments()
+
+    comments
+  end
 end

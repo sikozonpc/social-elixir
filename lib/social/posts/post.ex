@@ -1,13 +1,18 @@
 defmodule Social.Posts.Post do
   use Ecto.Schema
   import Ecto.Changeset
+  alias Social.Posts.Comments
 
   schema "posts" do
     field :title, :string
     field :content, :string
     field :read_count, :integer, default: 0
 
+    field :comments_count, :integer, virtual: true
+
     timestamps(type: :utc_datetime)
+
+    has_many :comments, Comments, on_delete: :delete_all
   end
 
   @doc false

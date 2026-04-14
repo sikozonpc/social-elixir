@@ -35,4 +35,29 @@
 
   </article>
 
+  <div class="max-w-2xl mx-auto px-8 py-16">
+    <div class="flex items-center gap-4 mb-10">
+      <div class="h-px flex-1 bg-base-content opacity-15"></div>
+      <span class="font-code text-[10px] tracking-[0.5em] uppercase opacity-40">
+        Comments
+      </span>
+      <div class="h-px flex-1 bg-base-content opacity-15"></div>
+    </div>
+
+    <div class="space-y-4 flex flex-col gap-4">
+      <%= for comment <- @post.comments do %>
+        <div class="flex items-center gap-2 pb-4">
+          <p class="font-display text-base leading-relaxed text-base-content opacity-75">{comment.content}</p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="max-w-2xl mx-auto px-8 py-16">
+    <.form for={@form} action={~p"/posts/#{@post.id}/comments"} method="post">
+      <.input field={@form[:content]} type="text" label="Comment" placeholder="Add a comment..." />
+      <.button type="submit">Add Comment</.button>
+    </.form>
+  </div>
+
 </div>
